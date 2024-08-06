@@ -1,0 +1,1320 @@
+<div class="col-sm-12">
+  <div class="card">
+    <div class="card-body">
+      <ul class="nav nav-pills mb-3" ngbNav #nav1="ngbNav">
+        <li class="nav-item me-3" [ngbNavItem]="1">
+          <a class="nav-link"
+            ngbNavLink
+            aria-controls="pills-home"
+            aria-selected="true">
+            รอรับใหม่
+          </a>
+          <ng-template ngbNavContent>
+            <div class="row" style="width: 33.33333%;  overflow-y: scroll; max-height: calc(100vh - 335px); min-height: 335px;">
+                @for (list of admitList; track list) {
+                  <div class="col-md-3 col-xl-12" (click)="openModalAdmit(content, list)">
+                    <div class="card card-social">
+                      <div class="card-block border-bottom">
+                        <div class="row align-items-center justify-content-center">
+                          <div class="col-auto">
+                            <img class="img-radius"
+                            [src]="list.pic"
+                            alt="Generic placeholder image"/>
+                          </div>
+                          <div class="col text-end">
+                            <h3 class="text-c-blue" style="text-align: left;"> {{ list.fullname }} </h3>
+                            <p class="mb-0" style="text-align: left;">
+                              <!-- {{ list.percentage }} -->
+                              <span class="text-muted">HN : {{ list.hn }} </span><br>
+                              <span class="text-muted">AN : {{ list.an }} </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+                <div *ngIf="admitList.length == 0" id="watermark">
+                  <p> ไม่มีข้อมูล </p>
+                </div>
+            </div>
+          </ng-template>
+        </li>
+        <li class="nav-item me-3" [ngbNavItem]="2">
+          <a
+            class="nav-link"
+            ngbNavLink
+            aria-controls="pills-home"
+            aria-selected="true">
+            เตียง
+          </a>
+          <ng-template ngbNavContent>
+            <div class="row">
+              @for (list of allBed; track list) {
+                <div class="col-md-3 col-xl-4" >
+                  <div class="card card-social">
+                    <div class="card-block border-bottom" (click)="openModalTable(table)">
+                      <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                          <img class="img-radius"
+                          [src]="(list.pic)? list.pic : '../../../assets/images/user/avatar-1.jpg'"
+                          alt="Generic placeholder image"/>
+                        </div>
+                        <div class="col text-end">
+                          <h3 [ngClass]="(!list.userHn)? ('text-c-green'): ('text-c-blue')"> {{ (!list.userHn)? 'ว่าง' : list.userFullName}} </h3>
+                          <h5 class="mb-0">
+                            <!-- {{ list.percentage }} -->
+                            <span class="text-muted">เตียง : {{ list.badName }} </span><br>
+                            <span *ngIf="list.dialysisName" class="text-muted">เครื่องฟอก : {{ list.dialysisName }} </span>
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-block">
+                      <div class="row align-items-center justify-content-center card-active">
+                        <div class="col-4">
+                          <h6 class="text-center m-b-10">
+                            <span class="text-muted m-r-5">HN : {{ (list.userHn)? list.userHn : '-' }}</span>
+                          </h6>
+
+                        </div>
+                        <div class="col-4">
+                          <h6 class="text-center m-b-10">
+                            <span class="text-muted m-r-5">Visit : {{ (list.visitId)? list.visitId : '-' }}</span >
+                          </h6>
+
+                        </div>
+                        <div class="col-4" style="    display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;">
+                          <button type="button" class="btn btn-outline-secondary" style="padding: 5px;" (click)="openModalCamera(camera)">Camera</button>
+                          <button type="button" class="btn btn-outline-danger" style="padding: 5px;" (click)="openModalBed(bedData, list)">DC</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </ng-template>
+        </li>
+        <li class="nav-item" [ngbNavItem]="3">
+          <a class="nav-link me-3"
+            ngbNavLink
+            aria-controls="pills-home"
+            aria-selected="true">
+            Discharge เอกสาร
+          </a>
+          <ng-template ngbNavContent>
+            <div class="row" style="width: 33.33333%;  overflow-y: scroll; max-height: calc(100vh - 335px); min-height: 335px;">
+              @for (list of admitListClose; track list) {
+                <div class="col-md-3 col-xl-12">
+                  <div class="card card-social">
+                    <div class="card-block border-bottom">
+                      <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
+                          <img class="img-radius"
+                          [src]="list.pic"
+                          alt="Generic placeholder image"/>
+                        </div>
+                        <div class="col text-end">
+                          <h3 class="text-c-blue" style="text-align: left;"> {{ list.fullname }} </h3>
+                          <p class="mb-0" style="text-align: left;">
+                            <!-- {{ list.percentage }} -->
+                            <span class="text-muted">HN : {{ list.hn }} </span><br>
+                            <span class="text-muted">AN : {{ list.an }} </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+              <div *ngIf="admitListClose.length == 0" id="watermark">
+                <p> ไม่มีข้อมูล </p>
+              </div>
+          </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav1" class="mt-2"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">เลือกเตียง / เครื่องฟอกใต</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="mb-3">
+          <div class="row">
+            <div class="col-3">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">เลือกเตียง</label>
+                <select class="form-control"  [(ngModel)]="badName"  id="exampleFormControlSelect1">
+                  <option value=""></option>
+                  <option [value]="item.badName"  *ngFor="let item of this.allBed">{{ item.badName }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">เลือกเครื่องฟอกไต</label>
+                <select class="form-control"  [(ngModel)]="dialysisName"  id="exampleFormControlSelect1">
+                  <option value=""></option>
+                  <option [value]="item.itemName"  *ngFor="let item of this.allDialysis">{{ item.itemName }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="text">น้ำหนัก</label>
+                <input type="number" [(ngModel)]="weigth" class="form-control" placeholder="น้ำหนัก" />
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="text">ส่วนสูง</label>
+                <input type="number" [(ngModel)]="height" class="form-control" placeholder="ส่วนสูง" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4 text-end">
+              <button type="button" class="btn btn-outline-primary" (click)="openModalHemo(hemodialysis)">Hemodialysis Sheet</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+
+              <div class="row">
+                <div class="col-lg">
+                  <label class="textHead">HN</label>
+                  <p class="textadd">  {{ hn }} </p>
+                </div>
+                <div class="col-lg">
+                  <label class="textHead">เลขบัตรประชาชน</label>
+                  <p class="textadd">  {{ visitId }} </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg">
+                  <label class="textHead">ชื่อจริง</label>
+                  <p class="textadd">  {{ firstName }} </p>
+                  <!-- <input [(ngModel)]="firstName" type="text"
+                  class="form-control form-control-lg form-control-solid" placeholder="ชื่อจริง" /> -->
+                </div>
+                <div class="col-lg">
+                  <label class="textHead">นามสกุล</label>
+                  <p class="textadd">  {{ lastName }} </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 "  style=" display: flex; flex-direction: column; justify-content: flex-end;">
+                  <label class="textHead">วันเกิด</label>
+                  <p class="textadd">  {{ day }} </p>
+
+                  <!-- <input [(ngModel)]="day" type="number"
+                  class="form-control form-control-lg form-control-solid" placeholder="วัน" /> -->
+                </div>
+                <div class="col-lg-3" style=" display: flex; flex-direction: column; justify-content: flex-end;">
+                  <label class="textHead">เดือน</label>
+                  <p class="textadd">  {{ month }} </p>
+
+                  <!-- <input [(ngModel)]="month" type="number"
+                  class="form-control form-control-lg form-control-solid" placeholder="เดือน" /> -->
+                </div>
+                <div class="col-lg-3" style=" display: flex; flex-direction: column; justify-content: flex-end;">
+                  <label class="textHead ">ปี</label>
+                  <p class="textadd">  {{ year }} </p>
+
+                  <!-- <input [(ngModel)]="year" type="number"
+                  class="form-control form-control-lg form-control-solid" placeholder="ปี" /> -->
+                </div>
+                <div class="col-lg-3" style=" display: flex; flex-direction: column; justify-content: flex-end;">
+                  <label class="textHead ">อายุ</label>
+                  <p class="textadd">  {{ age }} </p>
+
+                  <!-- <input [(ngModel)]="age" type="number"
+                  class="form-control form-control-lg form-control-solid" placeholder="อายุ" /> -->
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg">
+                  <label class="textHead">เบอร์โทร</label>
+                  <p class="textadd">  {{ phone }} </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <label class="textHead">ที่อยู่</label>
+                  <p class="textadd" style="text-align: left !important;"> {{address.addressLine}} </p>
+                  <!-- <input [(ngModel)]="address.addressLine" type="textarea"
+                  class="form-control form-control-lg form-control-solid" placeholder="ที่อยู่" /> -->
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg">
+                  <label class="textHead">จังหวัด</label>
+                  <p class="textadd">  {{ address.province }} </p>
+
+                  <!-- <input [(ngModel)]="address.province" type="text"
+                  class="form-control form-control-lg form-control-solid" placeholder="จังหวัด" /> -->
+                </div>
+                <div class="col-lg">
+                  <label class="textHead">อำเภอ</label>
+                  <p class="textadd">  {{ address.city }} </p>
+
+                  <!-- <input [(ngModel)]="address.city" type="text"
+                  class="form-control form-control-lg form-control-solid" placeholder="อำเภอ" /> -->
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg">
+                  <label class="textHead">ตำบล</label>
+                  <p class="textadd">  {{ address.district }} </p>
+
+                  <!-- <input [(ngModel)]="address.district" type="text"
+                  class="form-control form-control-lg form-control-solid" placeholder="ตำบล" /> -->
+                </div>
+                <div class="col-lg">
+                  <label class="textHead">ไปรษณีย์</label>
+                  <p class="textadd">  {{ address.postCode }} </p>
+
+                  <!-- <input [(ngModel)]="address.postCode" type="text"
+                  class="form-control form-control-lg form-control-solid" placeholder="ไปรษณีย์" /> -->
+                </div>
+              </div>
+
+              <!-- <mat-stepper [linear]="isLinear" #stepper>
+                <mat-step [stepControl]="firstFormGroup">
+                  <form [formGroup]="firstFormGroup">
+                    <ng-template matStepLabel>Fill out your name</ng-template>
+
+                    <div>
+                      <button mat-button matStepperNext type="button" class="btn btn-outline-primary">Next</button>
+                      <button type="button" class="btn btn-outline-secondary">Secondary</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+                  <form [formGroup]="secondFormGroup">
+
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="therdFormGroup" label="Fill out your address">
+                  <form [formGroup]="therdFormGroup">
+
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="therdFormGroup" label="Fill out your address">
+                  <form [formGroup]="therdFormGroup">
+
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button (click)="stepper.reset()">Reset</button>
+                    </div>
+                  </form>
+                </mat-step>
+
+              </mat-stepper> -->
+
+            </div>
+          </div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>
+
+
+<ng-template #bedData let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">D/C เอกสารคนไข้</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<!-- <div class="modal-body">
+		<form>
+			<div class="mb-3">
+				<div class="input-group">
+          <h1>
+            ต้อง DC คนไข้หรือไม่
+          </h1>
+				</div>
+			</div>
+		</form>
+	</div> -->
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>
+
+<ng-template #hemodialysis let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Hemodialysis Sheet</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+
+  <div class="modal-body"style="height: 560px; overflow-x: scroll;">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <ul class="nav nav-pills mb-3" style="justify-content: center;"  ngbNav #nav1="ngbNav">
+              <li class="nav-item me-3" [ngbNavItem]="1">
+                <a
+                  class="nav-link"
+                  ngbNavLink
+                  aria-controls="pills-home"
+                  aria-selected="true" >Pre-Dialysis Assessment</a>
+                <ng-template ngbNavContent>
+                  <div class="row">
+                    <div class="col-6" style="border-right: 3px solid #cfe2ff;">
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Pre BW</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Dry Weigth</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Weigth Gain</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Last BW</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Desire Weigth</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Meal / Drink</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">UF setting</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Post BW</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Weigth Loss</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">KG</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <h5 class="">Vascular Access</h5>
+                          <hr/>
+                          <div class="row">
+                            <div class="col-xl-4">
+                              <label class="form-check-label me-2" for="gridRadios1"> AVF </label>
+                              <input class="form-check-input"
+                                      type="radio"
+                                      name="gridRadios"
+                                      id="gridRadios1"
+                                      value="option1" checked />
+                            </div>
+                            <div class="col-xl-4">
+                              <label class="form-check-label me-2" for="gridRadios2">Graft</label>
+                              <input class="form-check-input"
+                                      type="radio"
+                                      name="gridRadios"
+                                      id="gridRadios2"
+                                      value="option2"/>
+                            </div>
+                            <div class="col-xl-4 ">
+                              <label class="form-check-label me-2" for="gridRadios3">DLC</label>
+                              <input class="form-check-input"
+                                      type="radio"
+                                      name="gridRadios"
+                                      id="gridRadios3"
+                                      value="option3"/>
+                            </div>
+                          </div>
+
+                          <div class="row mt-2">
+                            <div class="col-xl-4">
+                              <label class="form-check-label me-2" for="gridRadios11"> Perm </label>
+                              <input class="form-check-input"
+                                      type="radio"
+                                      name="gridRadios"
+                                      id="gridRadios11"
+                                      value="option11" checked />
+                            </div>
+                            <div class="col-xl-4">
+                              <label class="form-check-label me-2" for="gridRadios22">Right</label>
+                              <input class="form-check-input"
+                                      type="radio"
+                                      name="gridRadios"
+                                      id="gridRadios22"
+                                      value="option22"/>
+                            </div>
+                            <div class="col-xl-4">
+                              <label class="form-check-label me-2" for="gridRadios33">Left</label>
+                              <input class="form-check-input"
+                                      type="radio"
+                                      name="gridRadios"
+                                      id="gridRadios33"
+                                      value="option33"/>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl  mt-3">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th>16G (เข็มทู่)</th>
+                                      <th>Yes</th>
+                                      <th>No</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>Thrill</td>
+                                      <td>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="thrillYN"
+                                        id="thrillYN1"
+                                        value="thrillYN1"/>
+                                      </td>
+                                      <td>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="thrillYN"
+                                        id="thrillYN2"
+                                        value="thrillYN2" />
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Continuous Bruit</td>
+                                      <td>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="cbYN"
+                                        id="cbYN1"
+                                        value="cbYN1"/>
+                                      </td>
+                                      <td>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="cbYN"
+                                        id="cbYN2"
+                                        value="cbYN2" />
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Inflammation</td>
+                                      <td>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="InflammationYN"
+                                        id="InflammationYN1"
+                                        value="InflammationYN1"/>
+                                      </td>
+                                      <td>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="InflammationYN"
+                                        id="InflammationYN2"
+                                        value="InflammationYN2" />
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="col-xl  mt-3">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Yes</th>
+                                <th>No</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Dyspnea</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="DyspneaYN"
+                                  id="DyspneaYN1"
+                                  value="DyspneaYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="DyspneaYN"
+                                  id="DyspneaYN2"
+                                  value="DyspneaYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Orthopnea</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="OrthopneaYN"
+                                  id="OrthopneaYN1"
+                                  value="OrthopneaYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="OrthopneaYN"
+                                  id="OrthopneaYN2"
+                                  value="OrthopneaYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Chest pain</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="ChestPainYN"
+                                  id="ChestPainYN1"
+                                  value="ChestPainYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="ChestPainYN"
+                                  id="ChestPainYN2"
+                                  value="ChestPainYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Fever</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="FeverYN"
+                                  id="FeverYN1"
+                                  value="FeverYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="FeverYN"
+                                  id="FeverYN2"
+                                  value="FeverYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Headache</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="HeadacheYN"
+                                  id="HeadacheYN1"
+                                  value="HeadacheYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="HeadacheYN"
+                                  id="HeadacheYN2"
+                                  value="HeadacheYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Anorexia</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="AnorexiaYN"
+                                  id="AnorexiaYN1"
+                                  value="AnorexiaYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="AnorexiaYN"
+                                  id="AnorexiaYN2"
+                                  value="AnorexiaYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>N/V</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="NVYN"
+                                  id="NVYN1"
+                                  value="NVYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="NVYN"
+                                  id="NVYN2"
+                                  value="NVYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Diarrhea</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="DiarrheaYN"
+                                  id="DiarrheaYN1"
+                                  value="DiarrheaYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="DiarrheaYN"
+                                  id="DiarrheaYN2"
+                                  value="DiarrheaYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Itching</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="ItchingYN"
+                                  id="ItchingYN1"
+                                  value="ItchingYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="ItchingYN"
+                                  id="ItchingYN2"
+                                  value="ItchingYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Edema</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="EdemaYN"
+                                  id="EdemaYN1"
+                                  value="EdemaYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="EdemaYN"
+                                  id="EdemaYN2"
+                                  value="EdemaYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Neck vein en</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="NeckVeinEnYN"
+                                  id="NeckVeinEnYN1"
+                                  value="NeckVeinEnYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="NeckVeinEnYN"
+                                  id="NeckVeinEnYN2"
+                                  value="NeckVeinEnYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Ventilator</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="VentilatorYN"
+                                  id="VentilatorYN1"
+                                  value="VentilatorYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="VentilatorYN"
+                                  id="VentilatorYN2"
+                                  value="VentilatorYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Pale</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="PaleYN"
+                                  id="PaleYN1"
+                                  value="PaleYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="PaleYN"
+                                  id="PaleYN2"
+                                  value="PaleYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Crepitation</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="CrepitationYN"
+                                  id="CrepitationYN1"
+                                  value="CrepitationYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="CrepitationYN"
+                                  id="CrepitationYN2"
+                                  value="CrepitationYN2" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Other</td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="OtherYN"
+                                  id="OtherYN1"
+                                  value="OtherYN1"/>
+                                </td>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="OtherYN"
+                                  id="OtherYN2"
+                                  value="OtherYN2" />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li class="nav-item" [ngbNavItem]="2">
+                <a
+                  class="nav-link"
+                  ngbNavLink
+                  aria-controls="pills-home"
+                  aria-selected="true">Hemodialysis Prescription</a>
+                <ng-template ngbNavContent>
+                  <div class="row">
+                    <div class="col-6" style="border-right: 3px solid #cfe2ff;">
+                      <div class="row">
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="text">Machine</label>
+                            <input type="text" class="form-control" placeholder="Text" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="text">Dialyzer</label>
+                            <input type="text" class="form-control" placeholder="Text" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Surface area</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">sq.m.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Used No.</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <!-- <span class="input-group-text">sq.m.</span> -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">TCV</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">cu.mm.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">TCV</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">% from intial</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Dialysate flow</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">ml/min</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Dialysate temp</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">C</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Na+</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">mEq/L</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Na+</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">mEq/L</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">K+</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">mEq/L</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Ca2+</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">mEq/L</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">HCO3-</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">mEq/L</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="text">Time start</label>
+                            <input type="text" class="form-control" placeholder="Text" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Duration</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">Hours</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <div class="form-group">
+                            <label for="text">Time off</label>
+                            <input type="text" class="form-control" placeholder="Text" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <h5 class="">Anticoagulation</h5>
+                      <hr/>
+                      <div class="row">
+                        <div class="col-lg">
+                          <div class="table-responsive">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                      <th>Heparin 3500</th>
+                                      <th>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="Heparin"
+                                        id="Heparin1"
+                                        value="Heparin1"/>
+                                      </th>
+                                      <th>LMWH</th>
+                                      <th>
+                                        <input class="form-check-input"
+                                        type="radio"
+                                        name="LMWH"
+                                        id="LMWH1"
+                                        value="LMWH1" />
+                                      </th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Loading</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">unit stat</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">Maintenance</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">unit/3hr.</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <label class="form-label mb-3 required">No heparin</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <label class="form-label mb-3 required">NSS flush</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">ml</span>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="form-label mb-3 required">every</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                            <span class="input-group-text">min</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <label class="form-label mb-3 required">Sign:IC</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <label class="form-label mb-3 required">Sign:Med</label>
+                          <div class="input-group mb-3">
+                            <input  type="number"
+                            class="form-control form-control-lg form-control-solid" placeholder="0" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Fall</th>
+                                <th>Respiration</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="NoRick"
+                                  id="NoRick1"
+                                  value="NoRick1"/>
+                                  No rick
+                                </td>
+                                <td>
+                                  <div class="d-flex align-items-center">
+                                    On Sat
+                                    <input  type="number"
+                                    class="form-control form-control-lg form-control-solid" placeholder="0" />
+                                    <span class="input-group-text">%</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="LowRick"
+                                  id="LowRick1"
+                                  value="LowRick1"/>
+                                  Low rick
+                                </td>
+                                <td>
+                                  Room Air
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="RoomAir"
+                                  id="RoomAir1"
+                                  value="RoomAir1"/>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="HighRick"
+                                  id="HighRick1"
+                                  value="HighRick1"/>
+                                  High rick
+                                </td>
+                                <td>
+                                  No Oxygen
+                                  <input class="form-check-input"
+                                  type="radio"
+                                  name="NoOxygen"
+                                  id="NoOxygen1"
+                                  value="NoOxygen1"/>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav1" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>
+
+
+<ng-template #camera let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">ถ่ายรูป</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <div style="border: 5px solid #ff0000; background-color: rgb(82, 81, 81); width: 100%; height: 550px;">
+
+    </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>
+
+<ng-template #table let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title"></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr >
+                <th class="text-center">Time</th>
+                <th class="text-center">BP mming</th>
+                <th class="text-center">PR / min</th>
+                <th class="text-center">RR / min</th>
+                <th class="text-center">BFR / min</th>
+                <th class="text-center">VP mmHg</th>
+                <th class="text-center">TMP mmHg</th>
+                <th class="text-center">UF rate ml/min</th>
+                <th class="text-center">Total UF ml</th>
+                <th class="text-center">Remark</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="f-table">
+                <td colspan="10" class="text-center">
+                  <label style=" display: flex;
+                  flex-wrap: nowrap;
+                  align-items: center;">
+                    Before HD T<input type="text" class="form-control inputw80" placeholder="0" />C PR<input type="text" class="form-control inputw80" placeholder="0" />/min RR<input type="text" class="form-control inputw80" placeholder="0" />/min BP<input type="text" class="form-control inputw80" placeholder="0" />ml/min 02 sat<input type="text" class="form-control inputw80" placeholder="0" />%  HCT 26.0%
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+	</div>
+	<!-- <div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div> -->
+</ng-template>

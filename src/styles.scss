@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "scss/variables";
+
+/* fonts-icon */
+@import "scss/fonts/fontawesome/scss/fontawesome";
+@import "scss/fonts/feather/iconfont";
+
+@import "scss/general";
+@import "scss/generic";
+@import "scss/mixins/function";
+
+/* important element */
+@import "scss/menu/menu-lite";
+
+/* basic elements */
+@import "scss/theme-elements/theme-elements";
+
+/* third party modules style*/
+@import "scss/plugins/plugins";
+
+@import "scss/custom";
+
+
+.mat-primary {
+  --mat-option-selected-state-label-text-color: #131c2b;
+  --mat-option-label-text-color: #1a1b1f;
+  --mat-option-hover-state-layer-color: rgba(26, 27, 31, .08);
+  --mat-option-focus-state-layer-color: rgba(26, 27, 31, .12);
+  --mat-option-selected-state-layer-color: #dae2f9;
+  --mdc-circular-progress-active-indicator-color: #005cbb;
+  --mat-full-pseudo-checkbox-selected-icon-color: #005cbb;
+  --mat-full-pseudo-checkbox-selected-checkmark-color: #ffffff;
+  --mat-full-pseudo-checkbox-unselected-icon-color: #44474e;
+  --mat-full-pseudo-checkbox-disabled-selected-checkmark-color: #fdfbff;
+  --mat-full-pseudo-checkbox-disabled-unselected-icon-color: rgba(26, 27, 31, .38);
+  --mat-full-pseudo-checkbox-disabled-selected-icon-color: rgba(26, 27, 31, .38);
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color: #005cbb;
+  --mat-minimal-pseudo-checkbox-disabled-selected-checkmark-color: rgba(26, 27, 31, .38);
+  --mat-stepper-header-icon-foreground-color: #fdfbff;
+  --mat-stepper-header-selected-state-icon-background-color: #005cbb;
+  --mat-stepper-header-selected-state-icon-foreground-color: #ffffff;
+  --mat-stepper-header-edit-state-icon-background-color: #005cbb;
+  --mat-stepper-header-edit-state-icon-foreground-color: #ffffff;
+  --mat-stepper-container-color: #fdfbff;
+  --mat-stepper-line-color: #c4c6d0;
+  --mat-stepper-header-hover-state-layer-color: rgba(47, 48, 51, .08);
+  --mat-stepper-header-focus-state-layer-color: rgba(47, 48, 51, .12);
+  --mat-stepper-header-label-text-color: #44474e;
+  --mat-stepper-header-optional-label-text-color: #44474e;
+  --mat-stepper-header-selected-state-label-text-color: #44474e;
+  --mat-stepper-header-error-state-label-text-color: #ba1a1a;
+  --mat-stepper-header-icon-background-color: #44474e;
+  --mat-stepper-header-error-state-icon-foreground-color: #ba1a1a
+}
